@@ -38,4 +38,17 @@ describe("Task", function(){
     
     assert.equal(1, twoB); 
   });
+
+  it("can return a value", function(){
+    var result;
+    
+    var f = function() { return 42; };
+
+    var task = new Task(f);
+    task.start();
+
+    task.awaitResult(function(result){
+      assert.equal(42, result);
+    });
+  });
 });

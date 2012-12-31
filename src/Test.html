@@ -13,9 +13,9 @@
       }
 
       var task = Hodor.TaskFactory.startNew(f);
-      task.onmessage = function(m){
-         document.getElementById('message').innerHTML = m.data;
-      };
+      task.awaitResult(function(m){
+         document.getElementById('message').innerHTML = "result: " + task.result + ", data: " + m.data;
+      });
     </script>
   </body>
 </html>

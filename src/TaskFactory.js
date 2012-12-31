@@ -3,7 +3,7 @@ Hodor.TaskFactory = (function(){
   var TaskFactory = {
     startNew: function(f){
       var task = new Hodor.Task(f);
-      task.postMessage('start');
+      task.start();
       return task;
     }
   };
