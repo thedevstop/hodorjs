@@ -39,7 +39,7 @@ describe("Task", function(){
     assert.equal(1, twoB); 
   });
 
-  it("can return a value", function(){
+  it("can return a value", function(done){
     var result;
     
     var f = function() { return 42; };
@@ -49,6 +49,22 @@ describe("Task", function(){
 
     task.awaitResult(function(result){
       assert.equal(42, result);
+      done();
+    });
+
+  });
+
+  it("await result can wait", function(done){
+    var result;
+    
+    var f = function(done) { setTimeout(function(){ done(56); }, 150 ) };
+
+    var task = new Task(f);
+    task.start();
+
+    task.awaitResult(function(result){
+      assert.equal(56, result);
+      done();
     });
   });
 });

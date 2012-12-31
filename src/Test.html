@@ -6,16 +6,33 @@
     <script src="./TaskFactory.js"></script>
   </head>
   <body>
-    <span id="message"></span>
+    Await Result: <span id="awaitResult"></span><br/>
+    Result: <span id="result"></span><br/>
+    Synchronous: <span id="sync"></span><br/>
+    Async: <span id="async"></span><br/>
+
     <script type="text/javascript">
       function f(){
         return new Date();
       }
 
+      function sleepy(done){
+        setTimeout(function(){ done(new Date()); }, 2000);
+      };
+
       var task = Hodor.TaskFactory.startNew(f);
       task.awaitResult(function(m){
-         document.getElementById('message').innerHTML = "result: " + task.result + ", data: " + m.data;
+         document.getElementById('awaitResult').innerHTML = m;
+         document.getElementById('result').innerHTML = task.result;
+         document.getElementById('sync').innerHTML = m + "|" + task.result;
       });
+
+      var sleepyTask = Hodor.TaskFactory.startNew(sleepy);
+      sleepyTask.awaitResult(function(m){
+         document.getElementById('awaitResult').innerHTML = m;
+         document.getElementById('async').innerHTML = m + "|" + sleepyTask.result;
+      });
+      
     </script>
   </body>
 </html>
