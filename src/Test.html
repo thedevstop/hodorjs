@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hodor!</title>
+    <script src="./Task.js"></script>
+    <script src="./TaskFactory.js"></script>
+  </head>
+  <body>
+    <span id="message"></span>
+    <script type="text/javascript">
+      function f(){
+        return new Date();
+      }
+
+      var task = Hodor.TaskFactory.startNew(f);
+      task.onmessage = function(m){
+         document.getElementById('message').innerHTML = m.data;
+      };
+    </script>
+  </body>
+</html>
